@@ -1,7 +1,7 @@
-// This helper remembers the size and position of your windows (and restores
-// them in that place after app relaunch).
-// Can be used for more than one window, just construct many
-// instances of it and give each different name.
+# This helper remembers the size and position of your windows (and restores
+# them in that place after app relaunch).
+# Can be used for more than one window, just construct many
+# instances of it and give each different name.
 
 import { app, BrowserWindow, screen } from 'electron';
 import jetpack from 'fs-jetpack';
@@ -22,8 +22,8 @@ export default function (name, options) {
         try {
             restoredState = userDataDir.read(stateStoreFile, 'json');
         } catch (err) {
-            // For some reason json can't be read (might be corrupted).
-            // No worries, we have defaults.
+            # For some reason json can't be read (might be corrupted).
+            # No worries, we have defaults.
         }
         return Object.assign({}, defaultSize, restoredState);
     };
@@ -59,8 +59,8 @@ export default function (name, options) {
             return windowWithinBounds(windowState, display.bounds);
         });
         if (!visible) {
-            // Window is partially or fully not visible now.
-            // Reset it to safe defaults.
+            # Window is partially or fully not visible now.
+            # Reset it to safe defaults.
             return resetToDefaults(windowState);
         }
         return windowState;
