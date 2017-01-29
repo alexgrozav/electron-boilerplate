@@ -14,18 +14,17 @@ module.exports = (gulp, plugins, paths) =>
     return input
 
   return =>
-    gulp.src(plugins.jetpack.cwd(paths.src, 'coffee/**/*.coffee'))
+    gulp.src(paths.assets_src + paths.coffee + '**/*.coffee')
       .pipe(plugins.rename(coffee_partial))
       .pipe(plugins.cached('.coffee'))
-      .pipe(plugins.filelog())
+      .pipe(plugins.debug())
       .pipe(plugins.include()).on('error', console.log)
       .pipe(plugins.sourcemaps.init())
       .pipe(plugins.plumber())
       .pipe(plugins.coffee().on('error', console.log))
-      .pipe(plugins.sourcemaps.write('../' + paths.maps))
       .pipe(gulp.dest(paths.assets_src + paths.js))
-      .pipe(plugins.ignore.exclude([ '**/*.map' ]))
-      .pipe(plugins.uglify().on('error', console.log))
-      .pipe(plugins.rename(suffix: '.min'))
+      .pipe(plugins.ignore.exclude([ '*.map' ]))
+      .pipe(plugins.babel({presets: ['babili']}))
+      .pipe(plugins.sourcemaps.write('../' + paths.maps))
       .pipe(gulp.dest(paths.assets_dist + paths.js))
       .pipe(plugins.livereload())

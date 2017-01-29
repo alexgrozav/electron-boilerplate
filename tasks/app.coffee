@@ -1,15 +1,16 @@
 # Include gulp
 gulp = require('gulp')
 plugins = require('gulp-load-plugins')()
-runsequence = require('run-sequence')
 
 batch = require('gulp-batch');
-plumber = require('gulp-plumber');
+runsequence = require('gulp-run-sequence');
 jetpack = require('fs-jetpack');
-bundle = require('./bundle');
+# bundle = require('./bundle');
 utils = require('./utils');
+logger = require('gulp-process-file-log')
 
 plugins.jetpack = jetpack
+plugins.filelog = logger
 
 livereload_port = 35729
 
@@ -17,6 +18,23 @@ paths =
   project: jetpack
   src: jetpack.cwd('./src')
   dist: jetpack.cwd('./app')
+
+  maps: 'maps/'
+  assets_src: 'src/'
+  assets_dist: 'app/assets/'
+  sass: 'sass/'
+  stylus: 'stylus/'
+  css: 'css/'
+  coffee: 'coffee/'
+  js: 'js/'
+  fonts: 'fonts/'
+  video: 'video/'
+  icon: 'icon/'
+  img: 'img/'
+  plugins: '../plugins/'
+  views: 'views/'
+  fixtures: 'fixtures/'
+
 
 # JS
 gulp.task('coffee', require('./app/coffee')(gulp, plugins, paths));

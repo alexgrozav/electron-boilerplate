@@ -15,9 +15,9 @@ module.exports = (gulp, plugins, paths) =>
     gulp.src(paths.assets_src + paths.sass + '**/*.sass')
       .pipe(plugins.rename(sass_partial))
       .pipe(plugins.cached('.sass'))
-      .pipe(plugins.filelog())
+      .pipe(plugins.debug())
       .pipe(plugins.sourcemaps.init())
-      .pipe(plugins.sass( 
+      .pipe(plugins.sass(
         outputStyle: 'expanded'
         indentedSyntax: true).on('error', plugins.sass.logError))
       .pipe(plugins.autoprefixer())

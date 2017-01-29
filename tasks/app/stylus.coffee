@@ -19,7 +19,7 @@ module.exports = (gulp, plugins, paths, nib) =>
     gulp.src(paths.assets_src + paths.stylus + '**/*.styl')
       .pipe(plugins.rename(stylus_partial))
       .pipe(plugins.cached('.styl'))
-      .pipe(plugins.filelog())
+      .pipe(plugins.debug())
       .pipe(plugins.sourcemaps.init())
       .pipe(plugins.ignore( (file) => /\_.+\.styl$/.test file.relative ))
       .pipe(plugins.plumber())

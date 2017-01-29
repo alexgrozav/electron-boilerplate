@@ -15,7 +15,7 @@ module.exports = (gulp, plugins, paths) =>
     gulp.src(paths.assets_src + paths.sass + '**/*.scss')
       .pipe(plugins.rename(scss_partial))
       .pipe(plugins.cached('.scss'))
-      .pipe(plugins.filelog())
+      .pipe(plugins.debug())
       .pipe(plugins.sourcemaps.init())
       .pipe(plugins.sass(outputStyle: 'expanded').on('error', plugins.sass.logError))
       .pipe(plugins.autoprefixer())

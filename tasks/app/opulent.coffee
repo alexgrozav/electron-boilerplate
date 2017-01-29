@@ -6,7 +6,7 @@ module.exports['opulent-page'] = (gulp, plugins, paths) =>
   return =>
     gulp.src(paths.views + '**/*.op')
       .pipe(plugins.cached('.op'))
-      .pipe(plugins.filelog())
+      .pipe(plugins.debug())
       .pipe(plugins.shell(['ruby render_page.rb <%= path(file.path) %>'],
         cwd: paths.fixtures
         templateData:
