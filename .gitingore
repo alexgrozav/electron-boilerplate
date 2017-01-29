@@ -1,0 +1,5 @@
+# Local node modules
+node_modules/*
+
+# MacOS Specific Files
+*._DS_Store
