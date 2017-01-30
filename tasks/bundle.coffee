@@ -1,6 +1,7 @@
 path = require('path')
 jetpack = require('fs-jetpack')
 rollup = require('rollup').rollup
+
 nodeBuiltInModules = [
   'assert'
   'buffer'
@@ -47,13 +48,17 @@ cached = {}
 module.exports = (src, dest, opts) =>
   opts = opts or {}
   opts.rollupPlugins = opts.rollupPlugins or []
+
   rollup(
     entry: src
     external: generateExternalModulesList()
     cache: cached[src]
-    plugins: opts.rollupPlugins).then (bundle) =>
+    plugins: opts.rollupPlugins)
+  .then (bundle) =>
     cached[src] = bundle
     jsFile = path.basename(dest)
+    mapDest = path.resolve(__dirname, '..', '..', 'application', 'assets', 'maps', jsFile)
+
     result = bundle.generate(
       format: 'cjs'
       sourceMap: true
@@ -64,6 +69,6 @@ module.exports = (src, dest, opts) =>
     # pollute the global namespace.
     isolatedCode = '(function () {' + result.code + '\n}());'
     Promise.all [
-      jetpack.writeAsync(dest, isolatedCode + '\n//# sourceMappingURL=' + jsFile + '.map')
-      jetpack.writeAsync(dest + '.map', result.map.toString())
+      jetpack.writeAsync(dest, isolatedCode + '\n//# sourceMappingURL=' + mapDest + '.map')
+      jetpack.writeAsync(mapDest + '.map', result.map.toString())
     ]

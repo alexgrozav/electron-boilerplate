@@ -1,0 +1,1 @@
+{"version":3,"file":"../../coffee/hello-world/hello-world.js","sources":["hello-world/hello-world.coffee"],"names":[],"mappings":"AAAA,OAAA,IAAO,KAAP,GAAe,SAAA;AACX,SAAO;AADI;;AAGf,OAAA,IAAO,GAAP,GAAa,SAAA;AACT,SAAO;AADE","sourcesContent":["export greet = ->\n    return 'Hello World!'\n\nexport bye = ->\n    return 'See ya!'\n"]}
