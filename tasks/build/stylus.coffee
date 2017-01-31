@@ -16,7 +16,7 @@ module.exports = (gulp, plugins, paths, nib) =>
     return
 
   return =>
-    gulp.src(paths.assets_dist + paths.stylus + '**/*.styl')
+    gulp.src(paths.assets_src + paths.stylus + '**/*.styl')
       .pipe(plugins.rename(stylus_partial))
       .pipe(plugins.cached('.styl'))
       .pipe(plugins.debug())

@@ -75,6 +75,9 @@ gulp.task 'build', =>
     'stylus'
     'imagemin'
   ], [
+    'cssmin'
+    'jsmin'
+  ],[
     'bundle'
     'environment'
   ]
